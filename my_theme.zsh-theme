@@ -4,19 +4,19 @@ if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="blue"; fi
 
 host_repr=('dieter-ws-a7n8x-arch' "%{$fg_bold[green]%}ws" 'dieter-p4sci-arch' "%{$fg_bold[blue]%}p4")
 
-time_enabled="%(?.%{$fg[cyan]%}.%{$fg[red]%})%*%{$reset_color%}"
+time_enabled="%(?.%{$fg[green]%}.%{$fg[red]%})%*%{$reset_color%}"
 time_disabled="%{$fg[green]%}%*%{$reset_color%}"
 time=$time_enabled
 
 local user="%(!.%{$fg[$NCOLOR]%}.%{$fg[$NCOLOR]%})%n%{$reset_color%}"
 
-local host="${host_repr[$HOST]:-$HOST}%{$reset_color%}"
+local host="%{$fg[cyan]%}@${host_repr[$HOST]:-$HOST}%{$reset_color%}"
 
 local pwd="%{$fg[magenta]%}%~%{$reset_color%}"
 
 local suffix=" %{$fg[red]%}%(!.#.»)%{$reset_color%} "
 
-PROMPT='${time}•${user}@${host} ${pwd}$(git_prompt_info)${suffix}'
+PROMPT='${time}•${user}${host} ${pwd}$(git_prompt_info)${suffix}'
 PROMPT2='${time} %{$fg[red]%}\ %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%} ("
